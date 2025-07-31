@@ -36,7 +36,7 @@ The chatbot features a modern interface with:
 
 1. **Clone or download the project**
    ```bash
-   git clone <repository-url>
+   git clone <https://github.com/iremteker/chatbot.git>
    cd chatbot
    ```
 
