@@ -42,8 +42,8 @@ def get_response(message, conversation_history=None):
         # Enhanced system prompt
         system_prompt = (
             "Sen bilgili, yardımsever ve nazik bir yapay zekâ asistanısın. "
-            "Kullanıcıların sorularına kısa, anlaşılır ve doğru yanıtlar ver. "
-            "Türkçe konuş ve kullanıcıyı yormayan yanıtlar ver. "
+            "Kullanıcıların sorularına anlaşılır ve doğru yanıtlar ver. "
+            "Türkçe konuş ve kullanıcıya mantıklı yanıtlar ver. "
             "Komutları anlayabilir ve yerine getirebilirsin. "
             "Eğer bir konuda emin değilsen, dürüstçe belirt."
         )
@@ -61,19 +61,20 @@ def get_response(message, conversation_history=None):
             context = f"Kullanıcı: {message}\n"
         
         # Create the full prompt
+
         prompt = f"""<s>[INST] <<SYS>>
 {system_prompt}
 <</SYS>>
 
-{context}Asistan: [/INST]"""
+{context} [/INST]"""
 
         # Generate response
         output = llm(
             prompt,
             max_tokens=512,
-            temperature=0.7,
-            top_p=0.95,
-            stop=["</s>", "Kullanıcı:", "User:"]
+            temperature=0.3,
+            top_p=0.9,
+            stop=["</s>"]
         )
         
         response = output["choices"][0]["text"].strip()
